@@ -32,7 +32,6 @@ export class UserResolver {
 
   @Query(() => User)
   user(@Args('userId', { type: () => Int }) userId: number): User {
-    // For now, return the static data based on the userId
     return UserResolver.userData;
-  }
+  }  
 }
