@@ -1,99 +1,183 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+Here's a `README.md` that provides an overview of your NestJS GraphQL API with the user update functionality, including the different types and modules involved:
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+---
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# User Management API with GraphQL
 
-## Description
+This project implements a NestJS GraphQL API for managing user information. It allows users to query and update their details, including contact information, address, marital status, nationality, driving license, and more.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Prerequisites
 
-## Project setup
+- Node.js (v16 or above)
+- npm or yarn
+- NestJS
+- GraphQL
 
+## Installation
+
+### 1. Clone the repository
 ```bash
-$ npm install
+git clone https://github.com/your-repository.git
+```
+```
+cd backend
 ```
 
-## Compile and run the project
-
+### 2. Install dependencies
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
+# or using yarn
+yarn install
 ```
 
-## Run tests
-
+### 3. Run the application
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run start
+# or using yarn
+yarn start
 ```
 
-## Deployment
+Your application should be running on `http://localhost:4000/graphql`.
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## GraphQL Schema
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+The API allows you to interact with the following types:
 
-```bash
-$ npm install -g mau
-$ mau deploy
+### User Types
+
+- **User**: Represents the user with their personal details, including name, national ID, contact info, emergency contact, and more.
+- **LocalizedName**: Represents the localized version of the user's name (e.g., Arabic or other languages).
+- **ContactInfo**: Contains the user's email and mobile number.
+- **EmergencyContact**: Contains the emergency contact details (name, relation, phone).
+- **Address**: Contains the address details of the user (city, street, postal code, etc.).
+- **DrivingLicense**: Contains driving license details (whether the user has a license, type, and expiry date).
+- **NationalId**: Contains the user's national ID and its expiry date.
+- **MaritalStatus**: Represents the user's marital status (e.g., single, married, divorced).
+- **Nationality**: Represents the user's nationality with the corresponding country.
+
+### Queries and Mutations
+
+#### 1. `user(userId: number): User`
+
+This query fetches the details of a user by their `userId`.
+
+**Example:**
+```graphql
+query {
+  user(userId: 1) {
+    firstName
+    familyName
+    contactInfo {
+      email
+      mobile
+    }
+    address {
+      city
+      street
+    }
+  }
+}
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
 
-## Resources
 
-Check out a few resources that may come in handy when working with NestJS:
+### Types and Input Types
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+#### **UpdateUserInput**
 
-## Support
+The input type for updating a user includes the following fields (all are optional):
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- `firstName`
+- `fatherName`
+- `grandfatherName`
+- `familyName`
+- `email`
+- `mobile`
+- `city`
+- `postalCode`
+- `building`
+- `street`
+- `floorNo`
+- `apartment`
+- `hasLicense`
+- `licenseType`
+- `dependants`
 
-## Stay in touch
+#### **User**
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+The `User` type includes the following fields:
 
-## License
+- `firstName`
+- `fatherName`
+- `grandfatherName`
+- `familyName`
+- `localizedName` (localized names in different languages)
+- `nationalId` (national ID details)
+- `nationalities` (array of nationality information)
+- `maritalStatus` (marital status details)
+- `dependants` (number of dependants)
+- `contactInfo` (email and mobile number)
+- `emergencyContact` (emergency contact details)
+- `address` (address details)
+- `drivingLicense` (driving license details)
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+### Example Response for `user` Query
+```json
+{
+  "data": {
+    "user": {
+      "firstName": "Zaria",
+      "fatherName": "Edward",
+      "grandfatherName": "Ernest",
+      "familyName": "Willie",
+      "localizedName": {
+        "firstName": "صفوان",
+        "fatherName": "حمدان",
+        "grandfatherName": "هشام",
+        "familyName": "عباس"
+      },
+      "nationalId": {
+        "idNumber": "1c1f3fde-0581-4afb-8c7e-abacf3bc5875",
+        "expiryDate": "2024-07-24T22:45:29.864Z"
+      },
+      "nationalities": [
+        {
+          "country": { "id": 1016, "name": "Bolivia" },
+          "countryId": 1016
+        }
+      ],
+      "maritalStatus": {
+        "id": "27",
+        "name": "Divorced"
+      },
+      "dependants": 60,
+      "contactInfo": {
+        "email": "zaria@example.com",
+        "mobile": "+123456789"
+      },
+      "emergencyContact": {
+        "name": "Lily Ernest",
+        "relation": "Sister",
+        "phone": "+987654321"
+      },
+      "address": {
+        "country": "USA",
+        "city": "New York",
+        "postalCode": "10001",
+        "building": "123",
+        "street": "5th Avenue",
+        "floorNo": "2",
+        "apartment": "4B"
+      },
+      "drivingLicense": {
+        "hasLicense": true,
+        "type": "Class A",
+        "expiryDate": "2025-12-15T00:00:00.000Z"
+      }
+    }
+  }
+}
+```
+
+---
+
