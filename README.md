@@ -17,7 +17,7 @@ This project implements a NestJS GraphQL API for managing user information. It a
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/your-repository.git
+git clone https://github.com/kimo12345678/backend.git
 ```
 ```
 cd backend
