@@ -27,7 +27,34 @@ export class UserResolver {
       id: "27",
       name: "Divorced",
     },
-    dependants: 60
+    dependants: 60,
+    contactInfo: {
+      email: "zaria@example.com",
+      mobile: "+123456789",
+    },
+    emergencyContact: {
+      name: "Lily Ernest",
+      relation: "Sister",
+      phone: "+987654321",
+    },
+    address: {
+      country: "USA",
+      city: "New York",
+      postalCode: "10001",
+      building: "123",
+      street: "5th Avenue",
+      floorNo: "2",
+      apartment: "4B",
+    },
+    drivingLicense: {
+      hasLicense: true,
+      type: "Class A",
+      expiryDate: "2025-12-15T00:00:00.000Z",
+    },
+    militaryStatus: {
+      status: "Exempted",
+      requiresTravelPermit: false,
+    }
   };
 
   @Query(() => User)
