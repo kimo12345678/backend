@@ -1,5 +1,6 @@
-import { Resolver, Query, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { User } from './user.type';
+import { UpdateUserInput } from '../dto/UpdateUserInput';  // Input type for update
 
 @Resolver(() => User)
 export class UserResolver {
@@ -60,5 +61,15 @@ export class UserResolver {
   @Query(() => User)
   user(@Args('userId', { type: () => Int }) userId: number): User {
     return UserResolver.userData;
-  }  
+  }
+
+  @Mutation(() => User)
+  updateUser(
+    @Args('userId', { type: () => Int }) userId: number,
+    @Args('updateUserData') updateUserData: UpdateUserInput
+  ): User {
+    // Simulate the update by modifying the userData
+    const updatedUser = { ...UserResolver.userData, ...updateUserData };
+    return updatedUser;
+  }
 }
